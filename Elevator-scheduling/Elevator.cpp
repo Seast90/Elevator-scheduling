@@ -11,12 +11,12 @@ void Elevator::dispatch(int t,std::string str,int &wait)
 			t1 = person[position];
 			person[position] = 0;
 
-			for (int k = 1; k <= Maxfloor; k++) person[position] += a[position][k], a[position][k] = 0;
+			for (int k = 1; k <= Maxfloor; k++) person[k] += a[position][k], a[position][k] = 0;
 			s1 = a[position][0];
 			a[position][0] = 0;
 			wait -= s1;
 			tot = tot + s1 - t1;
-			//printf("%d 时，停靠在%d楼: 进电梯  %d人，出电梯 %d人。\n", i , pos- 1, s1, t1);
+			//printf_s("%d 时，停靠在%d楼: 进电梯  %d人，出电梯 %d人。\n", i , position- 1, s1, t1);
 			std::cout << i << ' ' << position - 1 << std::endl;
 		}
 		else
@@ -62,6 +62,7 @@ void Elevator::search()
 		std::string s;
 		max1 = 0xfffff; wait += man - k;
 		dfs(position, s, 0, wait, tot);
+		//std::cout << s1 << std::endl;
 		dispatch(t, s1, wait);
 	}
 }
